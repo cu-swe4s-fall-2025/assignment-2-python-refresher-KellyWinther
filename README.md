@@ -6,7 +6,7 @@
         * the default result column is index = 1 
 
 
-2. print_fires == If using the Agro_co2_emission.csv: This script uses the get_columns function to find the number of fires in a specified country and prints out the sum of all fires by type of fire as well as the total of all fire types combined. Note: this data is limited to the years that were reported and not all countries are reported equally. 
+2. print_fires.py == If using the Agro_co2_emission.csv: This script uses the get_columns function to find the number of fires in a specified country and prints out the sum of all fires by type of fire as well as the total of all fire types combined. Note: this data is limited to the years that were reported and not all countries are reported equally. 
 
 3. run.sh == bash script which runs the python print_fires.py script. Right now it is set to United States of America, but you can edit the print_fires.py script to pick a different country. 
 
