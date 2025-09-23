@@ -1,31 +1,28 @@
-#!/usr/bin/env python3
-
 import my_utils
 import argparse
 import sys
 
 
-def print_fires(country, country_column, fires_column, file_name):
-
+def print_fires(file_name, country_column, country, fires_column):
 
     """
     print_fires.py
     This function prints the number of fires in a specified country.
 
     Parameters:
-        country (str): The name of the country to search for.
+        file_name (str): The name of the CSV file to read.
         country_column (int): Column index containing country names.
+        country (str): The name of the country to search for.
         fires_column (int): Column index containing fire data.
-        file_name (str): CSV file to read from.
     """
 
     try:
         fires = my_utils.get_column(file_name, country_column, country, fires_column)
 
         # Convert values in fires array to floats and sum; skip empty strings
-        total_fires = sum(float(x) for x in fires if x.strip() != "")
+        total_fires = sum(float(x) for x in fires)
 
-        print(f'There were {total_fires}     fires in {country}.')
+        print(f'There were {total_fires} fires in {country}.')
         return total_fires
     
     except FileNotFoundError: 
@@ -43,14 +40,14 @@ def print_fires(country, country_column, fires_column, file_name):
 
 def main():    
     parser = argparse.ArgumentParser(description='Print the number of fires in a specified country from a CSV file.')
-    parser.add_argument('--country', type=str, required=True, help='The name of the country to search for.')
-    parser.add_argument('--country_column', type=int, required=True, help='Column index for country names.')
-    parser.add_argument('--fires_column', type=int, required=True, help='Column index for fire data.')
     parser.add_argument('--file_name', type=str, required=True, help='CSV file to read from.')
+    parser.add_argument('--country_column', type=int, required=True, help='Column index for country names.')
+    parser.add_argument('--country', type=str, required=True, help='The name of the country to search for.')
+    parser.add_argument('--fires_column', type=int, required=True, help='Column index for fire data.')
 
     args = parser.parse_args()
 
-    print_fires(args.country, args.country_column, args.fires_column, args.file_name)
+    print_fires(args.file_name, args.country_column, args.country, args.fires_column)
 
 if __name__ == "__main__":
     main()

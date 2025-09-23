@@ -1,7 +1,9 @@
+import sys
+
+
 def get_column(file_name, query_column, query_value, result_column=1):
 
     """
-    my_utils.py
     This function reads a CSV file and retrieves values from a specified column.
 
     Parameters:
@@ -14,24 +16,22 @@ def get_column(file_name, query_column, query_value, result_column=1):
     - List of integers: Values from result_column where the query_column == query_value.
     """
 
-# Initialize an empty array to store results
+    # Initialize an empty array to store results
     results = []
 
-# Open the file and read line by line:
+    # Open the file and read line by line:
     with open(file_name, "r") as file:
         for line in file:
             values = line.strip().split(",")
             
             # check if the value in the query_column matches the query_value
             if values[query_column] == (query_value):
-
                 try:
                     # convert to integers and append to results array if its a match
-                    results.append(int(values[result_column]))
+                    results.append(int(float(values[result_column])))
 
                 except ValueError:
-                    raise ValueError(
-                        f"Cannot convert value '{values[result_column]}' to integer in line: {line.strip()}"
-                        )
+                    print (f"Cannot convert value '{values[result_column]}'")
+                    sys.exit(1)
 
     return results
