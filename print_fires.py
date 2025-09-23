@@ -1,41 +1,56 @@
+#!/usr/bin/env python3
 
 import my_utils
-
-#Identify file you want to read:
-file_name = 'Agrofood_co2_emission.csv'
-
-
-#Identify search parameters:
-county_column = 0 #query_column = column index for country name
-country='United States of America' #query_value = country of interest
-#By default, result_column = 1 (the second column in the CSV), but you can change it to whatever column index you want.
+import argparse
+import sys
 
 
-#Options for result_column that report fires (please comment out the ones you don't want to run):
-savanna_fires_column = 2 
-forest_fires_column = 3  
-organic_soil_fires_column = 24 
-humid_tropical_forest_fires_column = 25 
+def print_fires(country, country_column, fires_column, file_name):
 
 
-#Run the function get_column to get the number of a given fire type in the specified country:
-savanna_fires = my_utils.get_column(file_name, county_column, country, savanna_fires_column)
-forest_fires = my_utils.get_column(file_name, county_column, country, forest_fires_column)
-organic_soil_fires = my_utils.get_column(file_name, county_column, country, organic_soil_fires_column)
-humid_tropical_forest_fires = my_utils.get_column(file_name, county_column, country, humid_tropical_forest_fires_column)
+    """
+    print_fires.py
+    This function prints the number of fires in a specified country.
+
+    Parameters:
+        country (str): The name of the country to search for.
+        country_column (int): Column index containing country names.
+        fires_column (int): Column index containing fire data.
+        file_name (str): CSV file to read from.
+    """
+
+    try:
+        fires = my_utils.get_column(file_name, country_column, country, fires_column)
+
+        # Convert values in fires array to floats and sum; skip empty strings
+        total_fires = sum(float(x) for x in fires if x.strip() != "")
+
+        print(f'There were {total_fires}     fires in {country}.')
+        return total_fires
+    
+    except FileNotFoundError: 
+        print(f"Error: The file '{file_name}' was not found.")
+        sys.exit(1)
+
+    except ValueError as ve:
+        print(f"ValueError: {ve}")
+        sys.exit(1)
+    
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        sys.exit(1)
 
 
-# Convert returned arrays to floats and sum; skipping empty strings
-savanna_total = sum(float(x) for x in savanna_fires if x.strip() != "") 
-forest_total = sum(float(x) for x in forest_fires if x.strip() != "")
-organic_soil_total = sum(float(x) for x in organic_soil_fires if x.strip() != "")
-humid_tropical_forest_total = sum(float(x) for x in humid_tropical_forest_fires if x.strip() != "")
+def main():    
+    parser = argparse.ArgumentParser(description='Print the number of fires in a specified country from a CSV file.')
+    parser.add_argument('--country', type=str, required=True, help='The name of the country to search for.')
+    parser.add_argument('--country_column', type=int, required=True, help='Column index for country names.')
+    parser.add_argument('--fires_column', type=int, required=True, help='Column index for fire data.')
+    parser.add_argument('--file_name', type=str, required=True, help='CSV file to read from.')
 
-Total_fires = savanna_total + forest_total + organic_soil_total + humid_tropical_forest_total
+    args = parser.parse_args()
 
+    print_fires(args.country, args.country_column, args.fires_column, args.file_name)
 
-print(f'There were {savanna_total} savanna fires in {country}.')
-print(f'There were {forest_total} forest fires in {country}.')
-print(f'There were {organic_soil_total} organic soil fires in {country}.')
-print(f'There were {humid_tropical_forest_total} humid tropical forest fires in {country}.')
-print(f'There were {Total_fires} total fires in {country}.')
+if __name__ == "__main__":
+    main()
