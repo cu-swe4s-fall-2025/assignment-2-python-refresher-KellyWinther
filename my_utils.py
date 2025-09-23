@@ -26,14 +26,12 @@ def get_column(file_name, query_column, query_value, result_column=1):
             
             # check if the value in the query_column matches the query_value
             if values[query_column] == (query_value):
-
                 try:
                     # convert to integers and append to results array if its a match
-                    results.append(int(values[result_column]))
+                    results.append(int(float(values[result_column])))
 
                 except ValueError:
-                    print (f"Cannot convert value '{values[result_column]}' to integer in line: {line.strip()}"
-                        )
+                    print (f"Cannot convert value '{values[result_column]}'")
                     sys.exit(1)
 
     return results

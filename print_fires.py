@@ -20,7 +20,7 @@ def print_fires(file_name, country_column, country, fires_column):
         fires = my_utils.get_column(file_name, country_column, country, fires_column)
 
         # Convert values in fires array to floats and sum; skip empty strings
-        total_fires = sum(float(x) for x in fires if x.strip() != "")
+        total_fires = sum(float(x) for x in fires)
 
         print(f'There were {total_fires} fires in {country}.')
         return total_fires
