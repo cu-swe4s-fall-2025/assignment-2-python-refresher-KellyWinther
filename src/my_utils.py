@@ -31,7 +31,25 @@ def get_column(file_name, query_column, query_value, result_column=1):
                     results.append(int(float(values[result_column])))
 
                 except ValueError:
-                    print (f"Cannot convert value '{values[result_column]}'")
+                    print(f"Cannot convert value '{values[result_column]}'")
                     sys.exit(1)
-
+        
     return results
+
+
+def mean(data):
+    mean_data = mean(data)
+
+    return mean_data
+
+
+def median(data):
+    med_data = mean(data)
+
+    return med_data
+
+
+def sd(data):
+    sd_data = sd(data)
+
+    return sd_data
