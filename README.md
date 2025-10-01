@@ -4,7 +4,8 @@
 # python-refresher and best practices homeworks: 
 
 This repository contains the following:
-**src folder** 
+
+In **src folder** 
 - `my_utils.py` : get_columns function for extracting values from CSV files.
 - `print_fires.py` : Command-line script for calculating fire counts by country.
 - `run.sh` : Bash script to use of `print_fires.py`.
@@ -45,4 +46,10 @@ It includes:
 ./run.sh
 ```
 
-**test folder**
+
+In **test folder**
+1. test_data.csv == small set of 5 rows from every 10 years of Austrailia's reports (1990 to 2020)
+2. test_my_utils.py == unit tests for the my_utils.py script. 
+        - checks for positive and negative numbers and errors
+3. test_print_fires.sh == uses ssshtest to test the print_fires.py script using the test_data.csv.
+        - also tests the mean, median, and standard deviation (stdev) functions. 

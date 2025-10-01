@@ -31,3 +31,10 @@ python3 print_fires.py \
    --country "United States of America" \
    --fires_column 2 
     
+# Example 1 - successful run
+echo "-- Example of a successful run --"
+python3 print_fires.py \
+    --file_name "test_data.csv" \
+    --country_column 0 \
+    --country "Australia" \
+    --fires_column 2
