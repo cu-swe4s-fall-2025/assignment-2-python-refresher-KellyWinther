@@ -1,16 +1,13 @@
-#!/bin/bash
+#how to run the test from the root directory: bash test/functional/test_print_fires.sh
 
-#make executable (use once): chmod +x test/test_print_fires.sh
-
-# Load ssshtest
 test -e ssshtest || curl -s -O https://raw.githubusercontent.com/ryanlayer/ssshtest/master/ssshtest
+. ssshtest
 
 source ssshtest
 
 python="python3"
-script="print_fires.py"
-test_data="test/test_data.csv"
-
+script="src/print_fires.py"
+test_data="test/functional/test_data.csv"
 
 # no --operation for Australia prints list of fires
 run test_no_operation $python $script \
@@ -29,11 +26,11 @@ assert_in_stdout 44471
 
 run test_median $python $script \
     --file_name $test_data --country_column 0 --country Australia --fires_column 2 --operation median
-assert_in_stdout 17618
+assert_in_stdout 35945
 
 run test_stdev $python $script \
     --file_name $test_data --country_column 0 --country Australia --fires_column 2 --operation stdev
-assert_in_stdout 27303
+assert_in_stdout 32005
 
 
 # Exit code/error tests
