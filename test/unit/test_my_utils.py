@@ -1,3 +1,5 @@
+#how to run the test: python3 test/unit/test_my_utils.py
+
 import sys
 import unittest
 import random
@@ -86,7 +88,7 @@ class TestMedian(unittest.TestCase):
         self.assertEqual(my_utils.median([3, 1, 2]), 2)
 
         # Even length
-        self.assertEqual(my_utils.median([4, 6, 2, 3]), 4.0)
+        self.assertEqual(my_utils.median([4, 6, 2, 3]), 3.5)
 
         #repeated values odd length
         self.assertEqual(my_utils.median([1, 2, 2, 2, 3]), 2)
@@ -116,10 +118,10 @@ class TestSTDev(unittest.TestCase):
         self.assertEqual(my_utils.stdev([5, 5, 5, 5]), 0)
 
         #negatives
-        self.assertAlmostEqual(my_utils.stdev([-1, -4, -5, -1]), 1.870828, places=6)
+        self.assertAlmostEqual(my_utils.stdev([-2, -4, -4, -4]), 0.8660254)
 
         #mixed neg and positives
-        self.assertAlmostEqual(my_utils.stdev([1, 2, 0, -1]), 1.290994, places=6)
+        self.assertAlmostEqual(my_utils.stdev([1, 2, 0, -1]), 1.11803399)
 
         # standard deviation is always non-negative
         arr = [random.randint(-20, 20) for _ in range(30)]
