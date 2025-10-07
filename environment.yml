@@ -1,0 +1,6 @@
+name: assignment4 # conda environment for continuous integration homework
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - pycodestyle>=2.14
