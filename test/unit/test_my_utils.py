@@ -1,4 +1,4 @@
-#how to run the test: python3 test/unit/test_my_utils.py
+# how to run the test: python3 test/unit/test_my_utils.py
 
 import sys
 import unittest
@@ -10,6 +10,7 @@ sys.path.append('src/')  # noqa
 import my_utils
 import tempfile
 import os
+
 
 class TestGetColumn(unittest.TestCase):
     def setUp(self):
@@ -27,22 +28,22 @@ class TestGetColumn(unittest.TestCase):
         # Clean up the temporary file after each test
         os.remove(self.file_name)
 
-    #positive values
+    # positive values
     def test_match_positive(self):
         result = my_utils.get_column(self.file_name, 0, "UK", 1)
         self.assertEqual(result, [5, 30])
-    
-    #negative values
+
+    # negative values
     def test_match_negative(self):
         result = my_utils.get_column(self.file_name, 0, "JAPAN", 1)
         self.assertEqual(result, [-2, -4])
 
-    #no matching country
+    # no matching country
     def test_no_match(self):
         result = my_utils.get_column(self.file_name, 0, "CANADA", 1)
         self.assertEqual(result, [])
 
-    #file not found
+    # file not found
     def test_bad_file(self):
         with self.assertRaises(SystemExit):
             my_utils.get_column("non_existent_file.csv", 0, "USA", 1)
@@ -90,16 +91,16 @@ class TestMedian(unittest.TestCase):
         # Even length
         self.assertEqual(my_utils.median([4, 6, 2, 3]), 3.5)
 
-        #repeated values odd length
+        # repeated values odd length
         self.assertEqual(my_utils.median([1, 2, 2, 2, 3]), 2)
 
-        #repeated values even length
+        # repeated values even length
         self.assertEqual(my_utils.median([1, 2, 2, 2, 3, 3]), 2.0)
 
         # for odd length, median must be an element
         arr = [random.randint(-50, 50) for _ in range(51)]
         med = my_utils.median(arr)
-        self.assertIn(med, arr)  
+        self.assertIn(med, arr)
 
         # for even length, median must be average of two elements
         arr = [random.randint(-50, 50) for _ in range(50)]
@@ -114,13 +115,13 @@ class TestMedian(unittest.TestCase):
 
 class TestSTDev(unittest.TestCase):
     def test_stdev(self):
-        #no variation
+        # no variation
         self.assertEqual(my_utils.stdev([5, 5, 5, 5]), 0)
 
-        #negatives
+        # negatives
         self.assertAlmostEqual(my_utils.stdev([-2, -4, -4, -4]), 0.8660254)
 
-        #mixed neg and positives
+        # mixed neg and positives
         self.assertAlmostEqual(my_utils.stdev([1, 2, 0, -1]), 1.11803399)
 
         # standard deviation is always non-negative

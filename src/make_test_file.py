@@ -4,7 +4,10 @@ input_file = "Agrofood_co2_emission.csv"
 output_file = "test_data.csv"
 target_country = "Australia"
 
-with open(input_file, "r", newline="") as infile, open(output_file, "w", newline="") as outfile:
+with (
+    open(input_file, "r", newline="") as infile,
+    open(output_file, "w", newline="") as outfile
+):
     reader = csv.reader(infile)
     writer = csv.writer(outfile)
 

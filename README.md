@@ -53,3 +53,15 @@ In **test folder**
         - checks for positive and negative numbers and errors
 3. test_print_fires.sh == uses ssshtest to test the print_fires.py script using the test_data.csv.
         - also tests the mean, median, and standard deviation (stdev) functions. 
+
+
+**Continuous Integration:**
+- Each time any branch pushes the workflow will automatically run unit, functional, and pycodestyle tests.
+
+- Any time there is a pull from the main it will also automatically run unit, functional, and pycodestyle tests. 
+
+1. unit test = test_my_utils.py
+2. functional test = test_print_fires.sh
+3. pycodestyle = uses pycode style to confirm that everything adheres to PEP8
+
+- workflow testing is written in the "unit_test.yml" file in the .github/workflows folder
