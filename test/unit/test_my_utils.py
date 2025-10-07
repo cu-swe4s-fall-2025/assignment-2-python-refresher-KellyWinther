@@ -1,4 +1,4 @@
-#how to run the test: python3 test/unit/test_my_utils.py
+# how to run the test: python3 test/unit/test_my_utils.py
 
 import sys
 import unittest
@@ -10,6 +10,7 @@ sys.path.append('src/')  # noqa
 import my_utils
 import tempfile
 import os
+
 
 class TestGetColumn(unittest.TestCase):
     def setUp(self):
@@ -23,7 +24,6 @@ class TestGetColumn(unittest.TestCase):
         self.test_file.close()
         self.file_name = self.test_file.name
 
-
     def tearDown(self):
         # Clean up the temporary file after each test
         os.remove(self.file_name)
@@ -32,7 +32,7 @@ class TestGetColumn(unittest.TestCase):
     def test_match_positive(self):
         result = my_utils.get_column(self.file_name, 0, "UK", 1)
         self.assertEqual(result, [5, 30])
-    
+
     # negative values
     def test_match_negative(self):
         result = my_utils.get_column(self.file_name, 0, "JAPAN", 1)
@@ -48,7 +48,6 @@ class TestGetColumn(unittest.TestCase):
         with self.assertRaises(SystemExit):
             my_utils.get_column("non_existent_file.csv", 0, "USA", 1)
 
-
     def test_not_a_number(self):
         # Rewrite test file with a string in the second column
         with open(self.file_name, "w") as f:
@@ -56,7 +55,6 @@ class TestGetColumn(unittest.TestCase):
 
         with self.assertRaises(SystemExit):
             my_utils.get_column(self.file_name, 0, "USA", 1)
-
 
     def test_bad_index(self):
         # Query column index out of bounds
