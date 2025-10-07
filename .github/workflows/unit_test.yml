@@ -3,23 +3,33 @@ name: Tests
 on:
   push:
   pull_request:
+    branches: [main]
 
 jobs:
   run_unit_test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: python test/unit/test_my_utils.py
+      - uses: mamba-org/setup-micromamba@v2
+        with:
+          environment-file: environment.yml
+          init-shell: bash
+      - run: |
+          python test/unit/test_my_utils.py
 
 
-  run_func_test:
+  run_functional_test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: bash test/functional/test_print_fires.sh
+        with:
+          environment-file: environment.yml
+          init-shell: bash
+      - run: |
+          bash test/functional/test_print_fires.sh
 
 
-  run_linter:
+  run_style_check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
