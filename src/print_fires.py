@@ -71,7 +71,7 @@ def main():
     parser.add_argument('--operation',
                         type=str,
                         choices=['mean', 'median', 'stdev'],
-                        help='Optional: mean, median, or stdev on the returned values')
+                        help='Optional: calculate mean, median, or stdev')
 
     args = parser.parse_args()
 
