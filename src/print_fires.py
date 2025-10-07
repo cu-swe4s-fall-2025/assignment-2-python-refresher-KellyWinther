@@ -46,13 +46,13 @@ def print_fires(file_name,
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Print the number of fires in a specified country from a CSV file.')
-    
+        description='Print the number of fires in a specified country')
+
     parser.add_argument('--file_name',
                         type=str,
                         required=True,
                         help='CSV file to read from.')
-    
+
     parser.add_argument('--country_column',
                         type=int,
                         required=True,
@@ -71,7 +71,7 @@ def main():
     parser.add_argument('--operation',
                         type=str,
                         choices=['mean', 'median', 'stdev'],
-                        help='Optional: Perform mean, median, or stdev on the returned fire values.')
+                        help='Optional: mean, median, or stdev on the returned values')
 
     args = parser.parse_args()
 
@@ -89,7 +89,9 @@ def main():
         print(f"The median number of fires in {args.country} is {result}.")
     elif args.operation == 'stdev':
         result = int(my_utils.stdev(all_fires))
-        print(f"The standard deviation of fires in {args.country} is {result}.")
+        print(
+            f"The standard deviation of fires in {args.country} is {result}."
+            )
     else:
         print(f"There were {all_fires} fires in {args.country}.")
 
